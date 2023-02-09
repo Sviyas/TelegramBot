@@ -1,0 +1,8 @@
+node_modules
+
+# Env Files
+.Env
+
+
+# ignore garbage files
+garbage
