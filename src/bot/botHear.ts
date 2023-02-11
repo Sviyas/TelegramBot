@@ -1,19 +1,20 @@
 import { message } from 'telegraf/filters';
 import { botMessage } from '../../Interface/botMessage';
 import writeFileSystem from '../../Models/storeFiles';
+import botScrapData from '../utils/msg';
 
 /**
  *
  * @param arg pass argument on telegraf
  */
 const botHear = async (arg: any) => {
-  arg.on(message('text'), async (ctx: any) => {
-    const msg = ctx as botMessage;
+  await arg.on(message('text'), async (ctx: any) => {
+    const msg = (await ctx) as botMessage;
 
     const getDay = new Date(msg.message.date * 1000).toLocaleString('en-US', {
       timeZone: 'Asia/kolkata'
     });
-    ctx.reply('OK');
+    await ctx.reply('Kindly wait our admin has on the Way');
     const ob = {
       user_Id: msg.message.from.id,
       first_Name: msg.message.from.first_name,
@@ -22,9 +23,9 @@ const botHear = async (arg: any) => {
       user_Messages: msg.message.text,
       messaged_Date: getDay
     };
-    const response = JSON.stringify(ob);
+    // const response = JSON.stringify(ob);
 
-    await writeFileSystem(response);
+    await writeFileSystem(ob);
   });
 };
 
