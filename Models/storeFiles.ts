@@ -15,23 +15,27 @@ async function readFile(filePath: any) {
 
 async function writeFiles(file: any) {
   try {
-    const data = await fs.appendFile(dataPath, file);
+    const parsed = JSON.stringify(file);
+
+    const data = await fs.writeFile(dataPath, parsed);
     return data;
   } catch (err) {
     return err;
   }
 }
 
-const writeFileSystem = async (fileData: string) => {
+const writeFileSystem = async (fileData: any) => {
   try {
-    const read = await readFile(dataPath);
+    const read = (await readFile(dataPath)) as any;
 
-    if (read === '') {
-      await writeFiles(fileData);
-    } else {
-      await writeFiles(fileData);
-    }
+    const parsedata = read === '' ? [] : JSON.parse(read);
+
+    parsedata.push(fileData);
+
+    await writeFiles(parsedata);
   } catch (err) {
+    console.log(err);
+
     return err;
   }
 };

@@ -6,13 +6,13 @@ import writeFileSystem from '../../Models/storeFiles';
  * @param arg Start The Bot
  */
 const startBotMsg = async (arg: any) => {
-  arg.start(async (ctx: any) => {
-    const msg = ctx as botMessage;
+  await arg.start(async (ctx: any) => {
+    const msg = (await ctx) as botMessage;
 
     const getDay = new Date(msg.message.date * 1000).toLocaleString('en-US', {
       timeZone: 'Asia/kolkata'
     });
-    ctx.reply('Welcome TO My Chat Bot \n Have a Wonderful Day');
+
     const ob = {
       user_Id: msg.message.from.id,
       first_Name: msg.message.from.first_name,
@@ -21,9 +21,12 @@ const startBotMsg = async (arg: any) => {
       user_Messages: msg.message.text,
       messaged_Date: getDay
     };
-    const response = JSON.stringify(ob);
+    // const response = JSON.stringify(ob);
+    await writeFileSystem(ob);
 
-    await writeFileSystem(response);
+    await ctx.reply(`Hello ${msg.message.chat.first_name}`);
+    await ctx.reply(`Have a Wonderful Day 🌟`);
+    await ctx.reply(`Welcome TO My Chat Bot\n This chat bot is help to show population of world `);
   });
 };
 
