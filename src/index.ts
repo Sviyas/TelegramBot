@@ -1,6 +1,8 @@
 import express from 'express';
 import { config } from 'dotenv';
-import scriptBot from './bot/script';
+import telegramBot from './bot/Telegram';
+import { countryPopulationList } from './data/ScrappedData';
+import { GlobalTypes } from '../Interface/common/index';
 
 // ? config env
 config();
@@ -11,7 +13,13 @@ const app = express();
 
 app.use(express.json());
 
-scriptBot(TOKEN as string);
+telegramBot(TOKEN as string);
+
+declare let global: GlobalTypes;
+
+(async () => {
+  await countryPopulationList();
+})();
 
 app.listen(PORT || 5232, async () => {
   console.log(`Server Listening`);

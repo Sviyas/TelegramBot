@@ -2,7 +2,7 @@
 import { botMessage } from '../../Interface/botMessage';
 import writeFileSystem from '../../Models/storeFiles';
 
-const botHelp = async (arg: any) => {
+const TGHelp = async (arg: any) => {
   // ? bot help
   await arg.help(async (ctx: any) => {
     const msg = ctx as botMessage;
@@ -12,4 +12,4 @@ const botHelp = async (arg: any) => {
   });
 };
 
-export default botHelp;
+export default TGHelp;

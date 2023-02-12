@@ -1,13 +1,12 @@
 import { message } from 'telegraf/filters';
 import { botMessage } from '../../Interface/botMessage';
 import writeFileSystem from '../../Models/storeFiles';
-import botScrapData from '../utils/msg';
 
 /**
  *
  * @param arg pass argument on telegraf
  */
-const botHear = async (arg: any) => {
+const TGListen = async (arg: any) => {
   await arg.on(message('text'), async (ctx: any) => {
     const msg = (await ctx) as botMessage;
 
@@ -29,4 +28,4 @@ const botHear = async (arg: any) => {
   });
 };
 
-export default botHear;
+export default TGListen;

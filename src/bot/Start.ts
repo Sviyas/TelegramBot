@@ -3,9 +3,9 @@ import writeFileSystem from '../../Models/storeFiles';
 
 /**
  *
- * @param arg Start The Bot
+ * @param arg Start The Telegram bot
  */
-const startBotMsg = async (arg: any) => {
+const TGStart = async (arg: any) => {
   await arg.start(async (ctx: any) => {
     const msg = (await ctx) as botMessage;
 
@@ -26,8 +26,8 @@ const startBotMsg = async (arg: any) => {
 
     await ctx.reply(`Hello ${msg.message.chat.first_name}`);
     await ctx.reply(`Have a Wonderful Day 🌟`);
-    await ctx.reply(`Welcome TO My Chat Bot\n This chat bot is help to show population of world `);
+    await ctx.reply(`Welcome TO My Chat \n This chat is help you to know how many populations are in this world `);
   });
 };
 
-export default startBotMsg;
+export default TGStart;
