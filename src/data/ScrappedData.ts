@@ -48,7 +48,7 @@ export const countryPopulationList = async () => {
     const el = await (await (await page.$x("//div [@id ='cp1']"))[0].getProperty('textContent')).jsonValue();
 
     const v1 = store.push(el);
-    console.log(v1);
+    // console.log(v1);
   }
   // console.log(store);
 
