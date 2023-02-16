@@ -1,36 +1,13 @@
 import path from 'path';
 import fs from 'fs/promises';
 import { DBTypes } from '../../../Interface/common';
+import { TGcmd } from './CmdUtils';
 
-const TGCountryCmd = async (bot: any) => {
-  // ? fetch Data from file
+const getCountry = async (bot: any) => {
   const data = await fs.readFile(path.resolve(__dirname, '../../../Database/country.json'));
-  const dataParse = (await JSON.parse(data.toString())) as DBTypes;
+  const dataParse = await JSON.parse(data.toString());
 
-  // ? fetch population
-  await bot.command(`WorldPopulation`, async (ctx: any) => {
-    await ctx.telegram.sendMessage(ctx.chat.id, `populations Data`, {
-      reply_markup: {
-        inline_keyboard: [
-          [
-            {
-              text: 'Countries',
-              callback_data: 'C'
-            },
-            {
-              text: 'States',
-              callback_data: 'ST'
-            },
-            {
-              text: 'OverAll',
-              callback_data: 'OA'
-            }
-          ]
-        ]
-      }
-    });
-  });
-
+  await TGcmd(bot);
   //   ? List of Countries
   bot.action('C', async (ctx: any) => {
     await ctx.telegram.sendMessage(ctx.chat.id, 'Select Country', {
@@ -40,11 +17,11 @@ const TGCountryCmd = async (bot: any) => {
             {
               text: 'INDIA',
               //   ? need to add data for countries
-              callback_data: 'Ind'
+              callback_data: 'India'
             },
             {
               text: 'USA',
-              callback_data: 'Us'
+              callback_data: 'Usa'
             },
             {
               text: 'RUSSIA',
@@ -187,68 +164,77 @@ const TGCountryCmd = async (bot: any) => {
   });
 
   // ? india
-  bot.action('Ind', async (ctx: any) => {
-    ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In India : ${dataParse.india}`);
-  });
-  bot.action('Us', async (ctx: any) => {
-    ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.usa} `);
-  });
-  bot.action('Ru', async (ctx: any) => {
-    ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.russia} `);
-  });
-  bot.action('Eg', async (ctx: any) => {
-    ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.egypt} `);
-  });
-  bot.action('Br', async (ctx: any) => {
-    ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.brazil}`);
-  });
-  bot.action('Ja', async (ctx: any) => {
-    ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.japan} `);
-  });
-  bot.action('Ni', async (ctx: any) => {
-    ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA :${dataParse.nigeria} `);
-  });
-  bot.action('Phi', async (ctx: any) => {
-    ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.philippines} `);
-  });
-  bot.action('Mex', async (ctx: any) => {
-    ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.mexico} `);
-  });
-  bot.action('In', async (ctx: any) => {
-    ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.indonesia}`);
-  });
-  bot.action('Ban', async (ctx: any) => {
-    ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.bangaladesh}`);
-  });
-  bot.action('Vie', async (ctx: any) => {
-    ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.vietnam}`);
-  });
-  bot.action('Con', async (ctx: any) => {
-    ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.cango}`);
-  });
-  bot.action('Eth', async (ctx: any) => {
-    ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.ethiopia}`);
-  });
-  bot.action('Tu', async (ctx: any) => {
-    ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.turkey}`);
-  });
-  bot.action('Thai', async (ctx: any) => {
-    ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.thailand}`);
-  });
-  bot.action('Ger', async (ctx: any) => {
-    ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.germany}`);
-  });
-  bot.action('Ir', async (ctx: any) => {
-    ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.iran}`);
-  });
-  bot.action('Ch', async (ctx: any) => {
-    ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.china}`);
-  });
-  bot.action('Pk', async (ctx: any) => {
-    ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA :${dataParse.pakistan} `);
-  });
+  const getValuesbyCountry = async (bot: any, ...args: string[]) => {
+    await args.forEach(el => {
+      bot.action(`${el}`, async (ctx: any) => {
+        console.log('key ', el);
+        const key = `${el}`;
+        console.log(`values ${dataParse[key]}`);
 
+        return ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In ${el} : ${dataParse[key]} `);
+      });
+    });
+  };
+
+  getValuesbyCountry(bot, 'India', 'Usa');
+
+  // bot.action('Us', async (ctx: any) => {
+  //   ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.usa} `);
+  // });
+  // bot.action('Ru', async (ctx: any) => {
+  //   ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.russia} `);
+  // });
+  // bot.action('Eg', async (ctx: any) => {
+  //   ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.egypt} `);
+  // });
+  // bot.action('Br', async (ctx: any) => {
+  //   ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.brazil}`);
+  // });
+  // bot.action('Ja', async (ctx: any) => {
+  //   ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.japan} `);
+  // });
+  // bot.action('Ni', async (ctx: any) => {
+  //   ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA :${dataParse.nigeria} `);
+  // });
+  // bot.action('Phi', async (ctx: any) => {
+  //   ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.philippines} `);
+  // });
+  // bot.action('Mex', async (ctx: any) => {
+  //   ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.mexico} `);
+  // });
+  // bot.action('In', async (ctx: any) => {
+  //   ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.indonesia}`);
+  // });
+  // bot.action('Ban', async (ctx: any) => {
+  //   ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.bangaladesh}`);
+  // });
+  // bot.action('Vie', async (ctx: any) => {
+  //   ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.vietnam}`);
+  // });
+  // bot.action('Con', async (ctx: any) => {
+  //   ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.cango}`);
+  // });
+  // bot.action('Eth', async (ctx: any) => {
+  //   ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.ethiopia}`);
+  // });
+  // bot.action('Tu', async (ctx: any) => {
+  //   ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.turkey}`);
+  // });
+  // bot.action('Thai', async (ctx: any) => {
+  //   ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.thailand}`);
+  // });
+  // bot.action('Ger', async (ctx: any) => {
+  //   ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.germany}`);
+  // });
+  // bot.action('Ir', async (ctx: any) => {
+  //   ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.iran}`);
+  // });
+  // bot.action('Ch', async (ctx: any) => {
+  //   ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.china}`);
+  // });
+  // bot.action('Pk', async (ctx: any) => {
+  //   ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA :${dataParse.pakistan} `);
   // });
 };
 
-export default TGCountryCmd;
+export default getCountry;

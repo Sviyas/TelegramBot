@@ -3,10 +3,10 @@ import fs from 'fs/promises';
 import path from 'path';
 
 /**
- * @returns return population of each countries
+ * @returns Fetch population count  each countries
  */
-export const countryPopulationList = async () => {
-  console.time('Country Data Time ');
+const countryPopulationList = async () => {
+  // console.time('Country Data Time ');
   // ? List of Countries
   const webUrls = [
     'https://countrymeters.info/en/India',
@@ -33,7 +33,8 @@ export const countryPopulationList = async () => {
 
   // ? accesing browser
   const browser = await puppeteer.launch({
-    headless: true
+    headless: true,
+    timeout: 0
   });
   // ? store countries population data's
   const store = [];
@@ -53,8 +54,8 @@ export const countryPopulationList = async () => {
   // console.log(store);
 
   const populatioList = {
-    india: store[0],
-    usa: store[1],
+    India: store[0],
+    Usa: store[1],
     russia: store[2],
     egypt: store[3],
     brazil: store[4],
@@ -79,3 +80,5 @@ export const countryPopulationList = async () => {
 
   await fs.writeFile(path.resolve(__dirname, '../../Database/country.json'), data);
 };
+
+export default countryPopulationList;

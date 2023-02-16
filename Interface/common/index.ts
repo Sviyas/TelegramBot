@@ -1,7 +1,3 @@
-export interface GlobalTypes {
-  functions: Array<string>[];
-}
-
 export interface DBTypes {
   india: string;
   usa: string;

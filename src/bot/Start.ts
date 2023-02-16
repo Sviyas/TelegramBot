@@ -21,12 +21,14 @@ const TGStart = async (arg: any) => {
       user_Messages: msg.message.text,
       messaged_Date: getDay
     };
-    // const response = JSON.stringify(ob);
+
     await writeFileSystem(ob);
 
     await ctx.reply(`Hello ${msg.message.chat.first_name}`);
     await ctx.reply(`Have a Wonderful Day 🌟`);
-    await ctx.reply(`Welcome TO My Chat \n This chat is help you to know how many populations are in this world `);
+    await ctx.reply(
+      `Welcome TO My Chat \nThis chat is help you to know how many populations are in this world \n more info to click this /WorldPopulation`
+    );
   });
 };
 
