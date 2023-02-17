@@ -20,3 +20,7 @@ export interface DBTypes {
   pakistan: string;
   bangaladesh: string;
 }
+
+export interface worldCount {
+  worldPopulationCount: string;
+}

@@ -2,7 +2,7 @@ import express from 'express';
 import { config } from 'dotenv';
 import telegramBot from './bot/Telegram';
 import countryPopulationList from './data/ScrappedData';
-import worldPopulation from './data/worldPopulation';
+import worldPopulation from './data/WorldPopulation';
 
 // ? config env
 config();

@@ -2,10 +2,6 @@ import path from 'path';
 import fs from 'fs/promises';
 import { DBTypes } from '../../../Interface/common';
 
-// ? fetch Data from file
-const data = fs.readFile(path.resolve(__dirname, '../../../Database/country.json'));
-const dataParse = data.toString();
-
 /**
  *
  * @param bot Telegram bot CMD List
@@ -39,13 +35,15 @@ export const TGcmd = async (bot: any) => {
 /**
  *
  * @param bot TG Bot
- * @param dataParse Return Parsed Data
+ * @param dataParse Return Parsed Data and fetch data from db
  */
 export const getValuesbyCountry = async (bot: any, ...args: string[]) => {
-  const values = args.forEach((el: any) => {
-    bot.action(`${args}`, async (ctx: any) => {
-      ctx.ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In ${el} : ${dataParse.includes(el)}`);
+  const data = await fs.readFile(path.resolve(__dirname, '../../../Database/country.json'));
+  const dataParse = await JSON.parse(data.toString());
+  await args.forEach(el => {
+    bot.action(`${el}`, async (ctx: any) => {
+      const key = `${el}`;
+      return ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In ${el} : ${dataParse[key]} `);
     });
   });
-  return values;
 };

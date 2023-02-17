@@ -1,6 +1,5 @@
 import path from 'path';
 import fs from 'fs/promises';
-import { DBTypes } from '../../../Interface/common';
 import { TGcmd } from './CmdUtils';
 
 const getCountry = async (bot: any) => {
@@ -15,8 +14,7 @@ const getCountry = async (bot: any) => {
         inline_keyboard: [
           [
             {
-              text: 'INDIA',
-              //   ? need to add data for countries
+              text: 'IND',
               callback_data: 'India'
             },
             {
@@ -24,16 +22,16 @@ const getCountry = async (bot: any) => {
               callback_data: 'Usa'
             },
             {
-              text: 'RUSSIA',
-              callback_data: 'Ru'
+              text: 'RUS',
+              callback_data: 'Russia'
             },
             {
-              text: 'EGYPT',
-              callback_data: 'Eg'
+              text: 'EGY',
+              callback_data: 'Egypt'
             },
             {
-              text: 'BRAZIL',
-              callback_data: 'Br'
+              text: 'BRA',
+              callback_data: 'Brazil'
             },
             {
               text: 'More',
@@ -51,20 +49,20 @@ const getCountry = async (bot: any) => {
         inline_keyboard: [
           [
             {
-              text: 'JAPAN',
-              callback_data: 'Ja'
+              text: 'JPN',
+              callback_data: 'Japan'
             },
             {
-              text: 'NIGERIA',
-              callback_data: 'Ni'
+              text: 'NGA',
+              callback_data: 'Nigeria'
             },
             {
-              text: 'PHILLIPPINES',
-              callback_data: 'Phi'
+              text: 'PHL',
+              callback_data: 'Philippines'
             },
             {
-              text: 'MEXICO',
-              callback_data: 'Mex'
+              text: 'MEX',
+              callback_data: 'Mexico'
             },
             {
               text: 'More',
@@ -82,20 +80,20 @@ const getCountry = async (bot: any) => {
         inline_keyboard: [
           [
             {
-              text: 'INDONESIA',
-              callback_data: 'In'
+              text: 'IDN',
+              callback_data: 'Indonesia'
             },
             {
-              text: 'BANGLADESH',
-              callback_data: 'Ban'
+              text: 'BGD',
+              callback_data: 'Bangladesh'
             },
             {
-              text: 'VIETNAM',
-              callback_data: 'Vie'
+              text: 'VDR',
+              callback_data: 'Vietnam'
             },
             {
-              text: 'CONGO',
-              callback_data: 'Con'
+              text: 'COG',
+              callback_data: 'Congo'
             },
             {
               text: 'More',
@@ -113,20 +111,20 @@ const getCountry = async (bot: any) => {
         inline_keyboard: [
           [
             {
-              text: 'ETHIOPIA',
-              callback_data: 'Eth'
+              text: 'ETH',
+              callback_data: 'Ethiopia'
             },
             {
-              text: 'TURKEY',
-              callback_data: 'Tu'
+              text: 'TUR',
+              callback_data: 'Turkey'
             },
             {
-              text: 'THAILAND',
-              callback_data: 'Thai'
+              text: 'THAI',
+              callback_data: 'Thailand'
             },
             {
-              text: 'GERMANY',
-              callback_data: 'Ger'
+              text: 'DEU',
+              callback_data: 'Germany'
             },
             {
               text: 'More',
@@ -144,16 +142,16 @@ const getCountry = async (bot: any) => {
         inline_keyboard: [
           [
             {
-              text: 'IRAN',
-              callback_data: 'Ir'
+              text: 'IRN',
+              callback_data: 'Iran'
             },
             {
-              text: 'CHINA',
-              callback_data: 'Ch'
+              text: 'CHN',
+              callback_data: 'China'
             },
             {
-              text: 'PAKISTHAN',
-              callback_data: 'Pk'
+              text: 'PAK',
+              callback_data: 'Pakistan'
             }
           ]
         ]
@@ -163,78 +161,39 @@ const getCountry = async (bot: any) => {
     ctx.reply('End Of The Page');
   });
 
-  // ? india
+  // ? fetch popoulation data for each country
   const getValuesbyCountry = async (bot: any, ...args: string[]) => {
     await args.forEach(el => {
       bot.action(`${el}`, async (ctx: any) => {
-        console.log('key ', el);
         const key = `${el}`;
-        console.log(`values ${dataParse[key]}`);
-
         return ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In ${el} : ${dataParse[key]} `);
       });
     });
   };
 
-  getValuesbyCountry(bot, 'India', 'Usa');
-
-  // bot.action('Us', async (ctx: any) => {
-  //   ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.usa} `);
-  // });
-  // bot.action('Ru', async (ctx: any) => {
-  //   ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.russia} `);
-  // });
-  // bot.action('Eg', async (ctx: any) => {
-  //   ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.egypt} `);
-  // });
-  // bot.action('Br', async (ctx: any) => {
-  //   ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.brazil}`);
-  // });
-  // bot.action('Ja', async (ctx: any) => {
-  //   ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.japan} `);
-  // });
-  // bot.action('Ni', async (ctx: any) => {
-  //   ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA :${dataParse.nigeria} `);
-  // });
-  // bot.action('Phi', async (ctx: any) => {
-  //   ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.philippines} `);
-  // });
-  // bot.action('Mex', async (ctx: any) => {
-  //   ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.mexico} `);
-  // });
-  // bot.action('In', async (ctx: any) => {
-  //   ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.indonesia}`);
-  // });
-  // bot.action('Ban', async (ctx: any) => {
-  //   ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.bangaladesh}`);
-  // });
-  // bot.action('Vie', async (ctx: any) => {
-  //   ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.vietnam}`);
-  // });
-  // bot.action('Con', async (ctx: any) => {
-  //   ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.cango}`);
-  // });
-  // bot.action('Eth', async (ctx: any) => {
-  //   ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.ethiopia}`);
-  // });
-  // bot.action('Tu', async (ctx: any) => {
-  //   ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.turkey}`);
-  // });
-  // bot.action('Thai', async (ctx: any) => {
-  //   ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.thailand}`);
-  // });
-  // bot.action('Ger', async (ctx: any) => {
-  //   ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.germany}`);
-  // });
-  // bot.action('Ir', async (ctx: any) => {
-  //   ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.iran}`);
-  // });
-  // bot.action('Ch', async (ctx: any) => {
-  //   ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA : ${dataParse.china}`);
-  // });
-  // bot.action('Pk', async (ctx: any) => {
-  //   ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In USA :${dataParse.pakistan} `);
-  // });
+  getValuesbyCountry(
+    bot,
+    'India',
+    'Usa',
+    'Russia',
+    'Egypt',
+    'Brazil',
+    'Japan',
+    'Nigeria',
+    'Philippines',
+    'Mexico',
+    'Indonesia',
+    'Bangladesh',
+    'Vietnam',
+    'Congo',
+    'Ethiopia',
+    'Turkey',
+    'Thailand',
+    'Germany',
+    'Iran',
+    'China',
+    'Pakistan'
+  );
 };
 
 export default getCountry;

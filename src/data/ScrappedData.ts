@@ -6,7 +6,6 @@ import path from 'path';
  * @returns Fetch population count  each countries
  */
 const countryPopulationList = async () => {
-  // console.time('Country Data Time ');
   // ? List of Countries
   const webUrls = [
     'https://countrymeters.info/en/India',
@@ -56,24 +55,24 @@ const countryPopulationList = async () => {
   const populatioList = {
     India: store[0],
     Usa: store[1],
-    russia: store[2],
-    egypt: store[3],
-    brazil: store[4],
-    japan: store[5],
-    nigeria: store[6],
-    philippines: store[7],
-    mexico: store[8],
-    indonesia: store[9],
-    vietnam: store[10],
-    cango: store[11],
-    ethiopia: store[12],
-    turkey: store[13],
-    thailand: store[14],
-    germany: store[15],
-    iran: store[16],
-    china: store[17],
-    pakistan: store[18],
-    bangaladesh: store[19]
+    Russia: store[2],
+    Egypt: store[3],
+    Brazil: store[4],
+    Japan: store[5],
+    Nigeria: store[6],
+    Philippines: store[7],
+    Mexico: store[8],
+    Indonesia: store[9],
+    Vietnam: store[10],
+    Cango: store[11],
+    Ethiopia: store[12],
+    Turkey: store[13],
+    Thailand: store[14],
+    Germany: store[15],
+    Iran: store[16],
+    China: store[17],
+    Pakistan: store[18],
+    Bangaladesh: store[19]
   };
 
   const data = JSON.stringify(populatioList);

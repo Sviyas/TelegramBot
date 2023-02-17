@@ -1,9 +1,16 @@
 import { botMessage } from '../../Interface/botMessage';
-import TGCountryCmd from './commands/Country';
+import getCountry from './commands/Country';
+import worldCountDetails from './commands/OverallCount';
 
 const TGCommands = async (arg: any) => {
   // ? Fetch Country Data
-  await TGCountryCmd(arg);
+  await getCountry(arg);
+
+  // ? fetch Overall Data
+  await worldCountDetails(arg);
+
+  // ? fetch State Details
+  // await stateDetails()
 };
 
 export default TGCommands;
