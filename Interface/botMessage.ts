@@ -1,3 +1,4 @@
+// ? fetch users info
 export interface botMessage {
   update_id: number;
   message: {
@@ -17,5 +18,18 @@ export interface botMessage {
     };
     date: number;
     text: string;
+  };
+}
+
+export interface TGbotMessage {
+  update: {
+    update_id: number;
+    message: {
+      message_id: number;
+      from: {};
+      chat: {};
+      date: number;
+      text: string;
+    };
   };
 }

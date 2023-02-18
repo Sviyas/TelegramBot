@@ -1,10 +1,9 @@
 import path from 'path';
 import fs from 'fs/promises';
-import { DBTypes } from '../../../Interface/common';
 
 /**
  *
- * @param bot Telegram bot CMD List
+ * @param bot Telegram bot CMD List function
  */
 
 export const TGcmd = async (bot: any) => {
