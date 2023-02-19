@@ -8,7 +8,7 @@ const TGHelp = async (bot: any) => {
     const msg = ctx as botMessage;
 
     await ctx.reply(`How can I help You ${msg.message.from.first_name}`);
-    await ctx.reply(`This can perform the following commands\n -/start\n -/WorldPopulation `);
+    await ctx.reply(`This can perform the following commands\n -/start\n -/WorldPopulation \n -/quit `);
 
     await setTimeout(async () => {
       await ctx.telegram.sendMessage(ctx.chat.id, 'Please Provide Your contact detais', {
@@ -42,7 +42,7 @@ const TGHelp = async (bot: any) => {
         };
         console.log(storeUserInfo);
       });
-    }, 7000);
+    }, 2000);
   });
 };
 

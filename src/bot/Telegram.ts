@@ -3,39 +3,26 @@ import TGStart from './Start';
 import TGHelp from './Help';
 import TGListen from './Listen';
 import TGCommands from './CommandList';
-import { botMessage } from '../../Interface/botMessage';
-import { message } from 'telegraf/filters';
 
 const telegramBot = async (token: string) => {
   // ?  Create the New Bot
   const bot = new Telegraf(token as string);
 
-  // ? fetch phone number
-  // bot.help(async (ctx: any) => {
-  //   const msg = ctx as botMessage;
+  // ! server htmml via messages
+  // bot.start((ctx: any) => {
+  //   bot.telegram.sendMessage(ctx.chat.id, `<strong>bold</strong>`, {
+  //     parse_mode: 'HTML'
+  //   });
+  // });
 
-  //   await ctx.telegram.sendMessage(ctx.chat.id, 'Please Provide Your contact detais', {
-  //     parse_mode: 'Markdown',
-  //     reply_markup: {
-  //       one_time_keyboard: true,
-  //       keyboard: [
-  //         [
-  //           {
-  //             text: 'share phone Number',
-  //             request_contact: true
-  //           },
-  //           {
-  //             text: 'Cancel'
-  //           }
-  //         ]
-  //       ],
-  //       force_reply: true
-  //     }
-  //   });
-  //   bot.on(message('contact'), (ctx: any) => {
-  //     const contact = ctx.message.contact.phone_number;
-  //     console.log('Hello Contact', contact);
-  //   });
+  // ! quit command
+  // await bot.command('/quit', async (ctx: any) => {
+  //   console.log(ctx.message);
+
+  //   await ctx.telegram.leaveChat(ctx.message.chat.id);
+  //   await ctx.leaveChat();
+
+  //   console.log('check chat type', ctx.chat.type !== 'private');
   // });
 
   await TGStart(bot);
@@ -46,7 +33,7 @@ const telegramBot = async (token: string) => {
 
   await TGListen(bot);
 
-  await bot.launch();
+  await bot.launch({});
 
   process.once('SIGINT', () => bot.stop('SIGINT'));
   process.once('SIGTERM', () => bot.stop('SIGTERM'));
