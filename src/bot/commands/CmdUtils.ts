@@ -1,5 +1,6 @@
 import path from 'path';
 import fs from 'fs/promises';
+import { botMessage } from '../../../Interface/botMessage';
 
 /**
  *
@@ -45,4 +46,18 @@ export const getValuesbyCountry = async (bot: any, ...args: string[]) => {
       return ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In ${el} : ${dataParse[key]} `);
     });
   });
+};
+
+/**
+ * @params      pass a number or object
+ * @description Get Current Date
+ */
+
+export const getDay = async (arg: any) => {
+  const date = arg as botMessage;
+  const getDate = new Date(date.message.date * 1000).toLocaleString('en-US', {
+    timeZone: 'Asia/kolkata'
+  });
+
+  return getDate;
 };

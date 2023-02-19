@@ -11,38 +11,38 @@ const telegramBot = async (token: string) => {
   const bot = new Telegraf(token as string);
 
   // ? fetch phone number
-  bot.help(async (ctx: any) => {
-    const msg = ctx as botMessage;
+  // bot.help(async (ctx: any) => {
+  //   const msg = ctx as botMessage;
 
-    await ctx.telegram.sendMessage(ctx.chat.id, 'Please Provide Your contact detais', {
-      parse_mode: 'Markdown',
-      reply_markup: {
-        one_time_keyboard: true,
-        keyboard: [
-          [
-            {
-              text: 'share phone Number',
-              request_contact: true
-            },
-            {
-              text: 'Cancel'
-            }
-          ]
-        ],
-        force_reply: true
-      }
-    });
-    bot.on(message('contact'), (ctx: any) => {
-      const contact = ctx.message.contact.phone_number;
-      console.log('Hello Contact', contact);
-    });
-  });
+  //   await ctx.telegram.sendMessage(ctx.chat.id, 'Please Provide Your contact detais', {
+  //     parse_mode: 'Markdown',
+  //     reply_markup: {
+  //       one_time_keyboard: true,
+  //       keyboard: [
+  //         [
+  //           {
+  //             text: 'share phone Number',
+  //             request_contact: true
+  //           },
+  //           {
+  //             text: 'Cancel'
+  //           }
+  //         ]
+  //       ],
+  //       force_reply: true
+  //     }
+  //   });
+  //   bot.on(message('contact'), (ctx: any) => {
+  //     const contact = ctx.message.contact.phone_number;
+  //     console.log('Hello Contact', contact);
+  //   });
+  // });
 
   await TGStart(bot);
 
   await TGCommands(bot);
 
-  // await TGHelp(bot);
+  await TGHelp(bot);
 
   await TGListen(bot);
 

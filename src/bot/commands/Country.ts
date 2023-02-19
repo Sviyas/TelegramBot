@@ -1,14 +1,16 @@
 import path from 'path';
 import fs from 'fs/promises';
 import { TGcmd } from './CmdUtils';
+import { readFile } from '../../../Models/storeFiles';
 
 const getCountry = async (bot: any) => {
-  const data = await fs.readFile(path.resolve(__dirname, '../../../Database/country.json'));
-  const dataParse = await JSON.parse(data.toString());
+  const data = path.resolve(__dirname, '../../../Database/Country.json');
+  const dataParse = await readFile(data);
+  const fetchData = await JSON.parse(dataParse as string);
 
   await TGcmd(bot);
   //   ? List of Countries
-  bot.action('C', async (ctx: any) => {
+  await bot.action('C', async (ctx: any) => {
     await ctx.telegram.sendMessage(ctx.chat.id, 'Select Country', {
       reply_markup: {
         inline_keyboard: [
@@ -166,7 +168,7 @@ const getCountry = async (bot: any) => {
     await args.forEach(el => {
       bot.action(`${el}`, async (ctx: any) => {
         const key = `${el}`;
-        return ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In ${el} : ${dataParse[key]} `);
+        return ctx.telegram.sendMessage(ctx.chat.id, `Total Pouplation In ${el} : ${fetchData[key]} `);
       });
     });
   };

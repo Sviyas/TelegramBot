@@ -1,5 +1,6 @@
 import { botMessage } from '../../Interface/botMessage';
-import writeFileSystem from '../../Models/storeFiles';
+import { writeFileSystem } from '../../Models/storeFiles';
+import { getDay } from './commands/CmdUtils';
 
 /**
  *
@@ -9,9 +10,7 @@ const TGStart = async (arg: any) => {
   await arg.start(async (ctx: any) => {
     const msg = (await ctx) as botMessage;
 
-    const getDay = new Date(msg.message.date * 1000).toLocaleString('en-US', {
-      timeZone: 'Asia/kolkata'
-    });
+    const getDate = await getDay(msg);
 
     const ob = {
       user_Id: msg.message.from.id,
@@ -19,7 +18,7 @@ const TGStart = async (arg: any) => {
       user_Name: msg.message.from.username,
       msg_ID: msg.message.message_id,
       user_Messages: msg.message.text,
-      messaged_Date: getDay
+      messaged_Date: getDate
     };
 
     await writeFileSystem(ob);

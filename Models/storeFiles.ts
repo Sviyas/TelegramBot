@@ -2,8 +2,13 @@ import fs from 'fs/promises';
 import path from 'path';
 
 // ? Declare Path as Global
-const dataPath = path.resolve(__dirname, '../Database/user.json');
+const dataPath = path.resolve(__dirname, '../Database/userHistory.json');
 
+/**
+ *
+ * @param filePath
+ * @returns return a date from file
+ */
 async function readFile(filePath: any) {
   try {
     const data = await fs.readFile(filePath);
@@ -13,6 +18,11 @@ async function readFile(filePath: any) {
   }
 }
 
+/**
+ *
+ * @param file
+ * @returns Write a file for specific path
+ */
 async function writeFiles(file: any) {
   try {
     const parsed = JSON.stringify(file);
@@ -40,4 +50,4 @@ const writeFileSystem = async (fileData: any) => {
   }
 };
 
-export default writeFileSystem;
+export { writeFileSystem, readFile };

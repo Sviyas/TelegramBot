@@ -18,6 +18,15 @@ export interface botMessage {
     };
     date: number;
     text: string;
+    contact: {
+      phone_number: number;
+      first_name: string;
+      user_id: number;
+    };
+    location: {
+      latitude: number;
+      longitude: number;
+    };
   };
 }
 

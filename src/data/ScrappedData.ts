@@ -64,7 +64,7 @@ const countryPopulationList = async () => {
     Mexico: store[8],
     Indonesia: store[9],
     Vietnam: store[10],
-    Cango: store[11],
+    Congo: store[11],
     Ethiopia: store[12],
     Turkey: store[13],
     Thailand: store[14],
@@ -72,7 +72,7 @@ const countryPopulationList = async () => {
     Iran: store[16],
     China: store[17],
     Pakistan: store[18],
-    Bangaladesh: store[19]
+    Bangladesh: store[19]
   };
 
   const data = JSON.stringify(populatioList);
