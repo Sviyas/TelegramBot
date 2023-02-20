@@ -1,5 +1,4 @@
 import path from 'path';
-import fs from 'fs/promises';
 import { TGcmd } from './CmdUtils';
 import { readFile } from '../../../Models/storeFiles';
 
